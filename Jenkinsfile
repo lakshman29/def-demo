@@ -5,17 +5,24 @@ pipeline {
       steps {
         bat 'mvn -Dmaven.test.failure.ignore=true install'
       }
+      post {
+                success {
+                    junit 'target/surefire-reports/**/*.xml' 
+                }
+            }
+    }
+    
+    stage('Approve') {
+      steps {
+        input(message: 'shall we deploy to cloud foundry', id: 'userinput', ok: 'YES')
+      }
     }
     stage('push') {
       steps {
         pushToCloudFoundry(target: 'api.run.pivotal.io', organization: 'cloudfoundry.org', cloudSpace: 'development', credentialsId: 'public-cloud')
       }
     }
-    stage('userinput') {
-      steps {
-        input(message: 'shall we deploy to cloud foundry', id: 'yes', ok: 'no')
-      }
-    }
+    
   }
   tools {
     maven 'mvn'
