@@ -5,13 +5,18 @@ pipeline {
       steps {
         bat 'mvn -Dmaven.test.failure.ignore=true install'
       }
+      
+    }
+    stage('Test') {
+      steps{
+            bat 'mvn check'
+      }
       post {
                 success {
                     junit 'target/surefire-reports/**/*.xml' 
                 }
             }
-    }
-    
+        }
     stage('Approve') {
       steps {
         input(message: 'shall we deploy to cloud foundry', id: 'userinput', ok: 'YES')
