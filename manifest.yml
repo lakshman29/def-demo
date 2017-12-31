@@ -10,6 +10,6 @@ applications:
 - name: def-demo
   host: def-demo
   domain: cfapps.io
- # path: ../build-output/demo-0.0.1-SNAPSHOT.war
   path: target/demo-0.0.1-SNAPSHOT.war
+  # path: ../build-output/demo-0.0.1-SNAPSHOT.war
   services: []
