@@ -8,7 +8,7 @@ pipeline {
     }
     stage('push') {
       steps {
-        pushToCloudFoundry(target: 'api.run.pivotal.io', organization: 'cloudfoundry.org', cloudSpace: 'developer', credentialsId: 'public-cloud')
+        pushToCloudFoundry(target: 'api.run.pivotal.io', organization: 'cloudfoundry.org', cloudSpace: 'development', credentialsId: 'public-cloud')
       }
     }
   }
