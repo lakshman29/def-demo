@@ -1,10 +1,14 @@
 pipeline {
   agent any
   stages {
-    stage('build') {
+    stage('') {
       steps {
-        bat 'mvn clean compile install'
+        bat 'mvn -Dmaven.test.failure.ignore=true install'
       }
     }
+  }
+  environment {
+    maven = 'mvn '
+    jdk = 'java'
   }
 }
