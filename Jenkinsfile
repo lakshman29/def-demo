@@ -1,15 +1,21 @@
 pipeline {
   agent any
   stages {
+     stage('clean') {
+      steps {
+        bat 'mvn clean'
+      }
+      
+    }
     stage('build') {
       steps {
-        bat 'mvn -Dmaven.test.failure.ignore=true install'
+        bat 'mvn -Dmaven.test.skip=true install'
       }
       
     }
     stage('Test') {
       steps{
-            bat 'mvn check'
+            bat 'mvn test'
       }
       post {
                 success {
